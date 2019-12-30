@@ -1,0 +1,10 @@
+body{
+    margin: 0px;
+}
+
+header{
+    width: 100%;
+    background-color: pink;
+    font-size: 2em;
+    padding: 1%;
+}
