@@ -1,0 +1,11 @@
+{
+  "name": "raspi-ci",
+  "version": "1.0.0",
+  "description": "An express app for receiving webhooks from github",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ian King",
+  "license": "ISC"
+}
