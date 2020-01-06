@@ -7,6 +7,6 @@ const execCallback = (error, stdout, stderr) => {
 }
 
 exports.handleEvent = (req, res) => {
-    exec(`cd ${process.env.PROJECT_PATH} && git pull`, execCallback)
+    exec(`git -C ${process.env.PROJECT_PATH} pull`, execCallback)
     res.status(200).json({ message: req.body.message });
 }
