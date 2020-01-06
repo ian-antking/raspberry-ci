@@ -1,4 +1,4 @@
-FROM arm32v7/node:8.17.0-stretch
+FROM hypriot/rpi-node
 
 WORKDIR /app
 
