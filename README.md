@@ -20,9 +20,12 @@ touch .env
 Edit the file so that it contains the following key/value pairs:
 ```
 PORT=8000
-PROJECT_PATH=/Users/<YOUR_USER_NAME>/<PROJECT_REPO>
+PROJECT_PATH=/Users/<YOUR_USER_NAME>/<PROJECTS_DIRECTORY>
+GITHUB_USER=<USERNAME_OF_PROJECTS_OWNER>
 ```
-The project path must be absolute, the `env.example` file has been included as an example.
+The project path must point to the directory where you store your projects (e.g. /Users/pi/Projects). 
+
+The `env.example` file has been included as an example.
 
 The Raspberry Pi will also need a way to be accessible from the internet, this can be down with port-forwarding, ngrox or localtunnel.
 
@@ -31,7 +34,7 @@ The Raspberry Pi will also need a way to be accessible from the internet, this c
 Run the app:
 
 ```
-npm start
+docker-compose up
 ```
 
 POST requests to `/event` will trigger the app to perform a `git pull` for the repo specified in `PROJECT_PATH`.
