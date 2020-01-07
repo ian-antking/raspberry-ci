@@ -1,6 +1,7 @@
 const exec = require('child_process').exec;
 
-exports.handleEvent = (_, res) => {
+exports.handleEvent = (req, res) => {
+    const repo = `/app/${req.body.repository.full_name}`
     const execCallback = (error, stdout, stderr) => {
         if (stdout) {
             res.status(200).json({ message: "code successfully integrated" });
@@ -18,9 +19,9 @@ exports.handleEvent = (_, res) => {
 
     console.log('Pulling code from github...');
     exec(`
-            git -C ${process.env.PROJECT_PATH} reset --hard &&
-            git -C ${process.env.PROJECT_PATH} clean -df &&
-            git -C ${process.env.PROJECT_PATH} pull -f
+            git -C ${repo} reset --hard &&
+            git -C ${repo} clean -df &&
+            git -C ${repo} pull -f
             `, execCallback
         );
 }
