@@ -1,12 +1,15 @@
-version: '3'
+version: "3"
 services:
   raspberry-ci:
     container_name: raspberry-ci
-    build: .
+    build: 
+      context: .
+      args:
+        - port=${PORT}
     env_file: .env
-    ports: 
-     - 4000:4000
-    environment: 
+    ports:
+      - ${PORT}:${PORT}
+    environment:
       - NODE_ENV=production
-    volumes: 
+    volumes:
       - ${PROJECT_PATH}:/app/${GITHUB_USER}/

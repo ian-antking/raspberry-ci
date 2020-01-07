@@ -1,5 +1,7 @@
 FROM hypriot/rpi-node
 
+ARG port=4000
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -8,6 +10,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE $port
 
 CMD npm start
