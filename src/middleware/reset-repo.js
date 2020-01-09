@@ -1,6 +1,10 @@
 const exec = require('child_process').exec;
 
 const resetRepo = (req, res, next) => {
+    if (req.localRepoExists) {
+        next();
+    }
+
     const execCallback = (error, stdout, stderr) => {
         if (stdout) {
             console.log(stdout);
