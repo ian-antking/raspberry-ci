@@ -1,5 +1,5 @@
-const resolveProjectPath = () => {
+const resolveProjectsPath = () => {
     return process.env.DOCKER ? '/app/' : `${process.env.PROJECT_PATH}`;
 }
 
-module.exports = resolveProjectPath;
+module.exports = resolveProjectsPath;
