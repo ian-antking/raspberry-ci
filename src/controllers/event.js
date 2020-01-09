@@ -4,7 +4,7 @@ exports.handleEvent = (req, res) => {
     const repo = `/app/${req.body.repository.full_name}`
     const execCallback = (error, stdout, stderr) => {
         if (stdout) {
-            res.status(200).json({ message: "code successfully integrated" });
+            res.status(200).json({ message: stdout });
             console.log(stdout);
         };
         if (stderr) {
@@ -18,10 +18,14 @@ exports.handleEvent = (req, res) => {
     }
 
     console.log('Pulling code from github...');
-    exec(`
-            git -C ${repo} reset --hard &&
-            git -C ${repo} clean -df &&
-            git -C ${repo} pull -f
-            `, execCallback
-        );
+    if (process.env.NODE_ENV === 'development') {
+        exec(`echo Pulling code in ${repo}`, execCallback);
+    } else {
+        exec(`
+        git -C ${repo} reset --hard &&
+        git -C ${repo} clean -df &&
+        git -C ${repo} pull -f
+        `, execCallback
+    );
+    }
 }
