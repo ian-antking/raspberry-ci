@@ -1,7 +1,7 @@
 const exec = require('child_process').exec;
 
 exports.handleEvent = (req, res) => {
-    const repo = `/app/${req.body.repository.full_name}`
+    const repo = req.repo;
     const execCallback = (error, stdout, stderr) => {
         if (stdout) {
             res.status(200).json({ message: stdout });
