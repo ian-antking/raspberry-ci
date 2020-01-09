@@ -1,11 +1,10 @@
 const exec = require('child_process').exec;
 
-exports.handleEvent = (req, res) => {
-    const repo = req.repo;
+const resetRepo = (req, res, next) => {
     const execCallback = (error, stdout, stderr) => {
         if (stdout) {
-            res.status(200).json({ message: stdout });
             console.log(stdout);
+            next();
         };
         if (stderr) {
             console.log(stderr)
@@ -13,18 +12,16 @@ exports.handleEvent = (req, res) => {
         };
         if (error) {
             console.log(error);
-            res.status(500).json({ error: stderr })
+            res.status(500).json({ error: error })
         };
     }
 
-    console.log('Pulling code from github...');
+    const repo = req.repo;
     if (process.env.NODE_ENV === 'development') {
-        exec(`echo Pulling code in ${repo}`, execCallback);
+        exec(`echo hard reset ${repo}`, execCallback);
     } else {
-        exec(`
-        git -C ${repo} clean -df &&
-        git -C ${repo} pull -f
-        `, execCallback
-    );
+        exec(`git -C ${repo} reset --hard`, execCallback);
     }
-}
+};
+
+module.exports = resetRepo;
