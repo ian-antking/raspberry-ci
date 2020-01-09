@@ -6,7 +6,7 @@ services:
       context: .
       args:
         - port=${PORT}
-        - env=${NODE_ENV}
+        - env=${NODE_ENV:-"production"}
     env_file: .env
     ports:
       - ${PORT:-4000}:${PORT:-4000}
