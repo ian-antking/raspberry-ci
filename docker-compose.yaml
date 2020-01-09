@@ -14,3 +14,5 @@ services:
       - ${PROJECT_PATH}:/app/${GITHUB_USER}/
     command: npm start
     restart: always
+    environment: 
+      - DOCKER=true
