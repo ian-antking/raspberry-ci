@@ -12,9 +12,9 @@ const checkRepo = (req, res, next) => {
     req.repo = repoPath;
 
     if (fs.existsSync(req.repo)) {
-        req.localRepoExists = true;
         next();
     } else {
+        req.freshClone = true;
         runCommand(`git -C ${projectsPath} clone ${repoUrl}`, res);
     }
 }
