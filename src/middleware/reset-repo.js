@@ -1,4 +1,3 @@
-const exec = require('child_process').exec;
 const runCommand = require('../utils/run-command');
 
 const resetRepo = (req, res, next) => {

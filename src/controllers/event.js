@@ -4,13 +4,9 @@ exports.handleEvent = (req, res) => {
     const repo = req.repo;
 
     console.log('Pulling code from github...');
-    if (process.env.NODE_ENV === 'development') {
+    if (req.body.dryRun) {
         runCommand(`echo Pulling code in ${repo}`, res);
     } else {
-        runCommand(`
-        git -C ${repo} clean -df &&
-        git -C ${repo} pull -f
-        `, res
-    );
+        runCommand(`git -C ${repo} pull -f`, res);
     }
 }
