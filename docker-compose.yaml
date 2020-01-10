@@ -11,8 +11,15 @@ services:
     ports:
       - ${PORT:-4000}:${PORT:-4000}
     volumes:
-      - ${PROJECT_PATH}:/app/${GITHUB_USER}/
-    command: npm start
+      - ${PROJECT_PATH}:/app/
+    # command: npm start
     restart: always
     environment: 
       - DOCKER=true
+  mock-git-server:
+    container_name: mock-git
+    build:
+      context: ./test
+    ports:
+      - 8174:8174
+    command: ./node_modules/.bin/git-http-mock-server

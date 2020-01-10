@@ -17,3 +17,5 @@ RUN if [ $env = "development" ]; \
 	fi
 
 COPY . .
+
+RUN npm start
