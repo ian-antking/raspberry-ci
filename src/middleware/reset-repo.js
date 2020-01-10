@@ -1,29 +1,15 @@
 const exec = require('child_process').exec;
+const runCommand = require('../utils/run-command');
 
 const resetRepo = (req, res, next) => {
-    const execCallback = (error, stdout, stderr) => {
-        if (stdout) {
-            console.log(stdout);
-            next();
-        };
-        if (stderr) {
-            console.log(stderr)
-            res.status(500).json({ error: stderr });
-        };
-        if (error) {
-            console.log(error);
-            res.status(500).json({ error: error })
-        };
-    }
+    const repo = req.repo;
+
     if (req.freshClone) {
         next();
-    }
-
-    const repo = req.repo;
-    if (req.body.dryRun) {
-        exec(`echo hard reset ${repo}`, execCallback);
+    } else if (req.body.dryRun) {
+        runCommand(`echo hard reset ${repo}`, res, next);
     } else {
-        exec(`git -C ${repo} reset --hard`, execCallback);
+        runCommand(`git -C ${repo} reset --hard`, res, next);
     }
 };
 
