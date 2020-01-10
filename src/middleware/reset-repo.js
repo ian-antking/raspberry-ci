@@ -20,7 +20,7 @@ const resetRepo = (req, res, next) => {
     }
 
     const repo = req.repo;
-    if (process.env.NODE_ENV === 'development') {
+    if (req.body.dryRun) {
         exec(`echo hard reset ${repo}`, execCallback);
     } else {
         exec(`git -C ${repo} reset --hard`, execCallback);
