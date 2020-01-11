@@ -1,5 +1,6 @@
 version: "3"
 services:
+  
   raspberry-ci:
     container_name: node-app
     build: 
@@ -11,7 +12,7 @@ services:
     ports:
       - ${PORT:-4000}:${PORT:-4000}
     volumes:
-      - ${PROJECT_PATH}:/app/${GITHUB_USER}/
+      - ${PROJECT_PATH}:/app/
     command: npm start
     restart: always
     environment: 

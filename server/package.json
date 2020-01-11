@@ -4,7 +4,7 @@
   "description": "An express app for receiving webhooks from github",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/**/*.test.js --opts .mocha.opts",
     "dev": "nodemon -r dotenv/config index.js",
     "start": "node -r dotenv/config index.js"
   },

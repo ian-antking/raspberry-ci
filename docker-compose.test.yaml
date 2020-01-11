@@ -1,0 +1,12 @@
+version: "3"
+services:
+  
+  raspberry-ci:
+    command: 'npm test'
+
+  mock-git-server:
+    container_name: mock-git
+    build:
+      context: ./git-http-mock-server
+    ports:
+      - 8174:8174
