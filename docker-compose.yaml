@@ -3,7 +3,7 @@ services:
   raspberry-ci:
     container_name: node-app
     build: 
-      context: .
+      context: ./server
       args:
         - port=${PORT}
         - env=${NODE_ENV:-"production"}
@@ -19,6 +19,6 @@ services:
   mock-git-server:
     container_name: mock-git
     build:
-      context: ./test
+      context: ./git-http-mock-server
     ports:
       - 8174:8174
