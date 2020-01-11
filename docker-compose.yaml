@@ -3,7 +3,7 @@ services:
   raspberry-ci:
     container_name: node-app
     build: 
-      context: .
+      context: ./server
       args:
         - port=${PORT}
         - env=${NODE_ENV:-"production"}
