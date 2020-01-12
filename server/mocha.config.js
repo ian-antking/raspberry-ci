@@ -21,9 +21,14 @@ before((done) => {
   // add test globals
   global.chai = chai;
   global.expect = chai.expect;
-  done();
+
+  server = app.listen(process.env.PORT || 4000, () => {
+    global.server = `http://127.0.0.1:${server.address().port}`;
+    done();
+  })
 });
 
 after((done) => {
+  server.close();
   done();
 });
