@@ -7,12 +7,10 @@ services:
       args:
         - port=${PORT}
         - env=${NODE_ENV:-"production"}
-    env_file: .env
     ports:
       - ${PORT:-4000}:${PORT:-4000}
     volumes:
       - ${PROJECT_PATH}:/app/${GITHUB_USER}/
     command: npm start
-    restart: always
     environment: 
       - DOCKER=true

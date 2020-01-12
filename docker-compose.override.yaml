@@ -1,0 +1,16 @@
+version: "3"
+services:
+  raspberry-ci:
+    command: npm test
+    env_file: .env.test
+    depends_on: 
+      - mock-git-server
+
+  mock-git-server:
+    container_name: mock-git
+    build:
+      context: ./git-http-mock-server
+    env_file: .env.test
+    ports:
+      - 8174:8174
+    command: ./node_modules/.bin/git-http-mock-server 
