@@ -1,4 +1,4 @@
-FROM hypriot/rpi-node
+FROM balenalib/raspberry-pi-alpine-node
 
 ARG port=4000
 ARG env="production"
