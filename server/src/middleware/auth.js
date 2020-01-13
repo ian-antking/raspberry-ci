@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 
 const auth = (req, res, next) => {
-   console.log(req.body.toString());
     const sha = crypto
         .createHmac('sha1', process.env.SECRET)
         .update(JSON.stringify(req.body))
