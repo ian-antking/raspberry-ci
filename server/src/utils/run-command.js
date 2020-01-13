@@ -1,26 +1,30 @@
 const exec = require('child_process').exec;
 
-const errorResponse = (error, res) => {
-    console.log('error', error);
-    res.status(500).json({ error: error })
-}
-
-const stdErrResponse = (stderr, res) => {
-    res.status(500).json({ error: stderr });
-}
-
-const successResponse = (stdout, res) => {
-    res.status(200).json({ message: stdout });
-}
-
-const runCommand = (command, res, customSuccess, args=[]) => {
-    const execCallback = (error, stdout, stderr) => {
-        if (error) errorResponse(error, res);
-        if (stderr) stdErrResponse(stderr, res);
-        if (customSuccess) {
-            console.log('custom success')
-            customSuccess(stdout, res);
+const runCommand = (command, res) => {
+    const errorResponse = (error, res) => {
+        res.status(500).json({ error: error })
+    }
+    
+    const stdErrResponse = (stderr, res) => {
+        if (stderr.includes('warning')) {
+            successResponse(stderr, res);
         } else {
+            res.status(500).json({ error: stderr });
+        }
+    }
+    
+    const successResponse = (stdout, res) => {
+        res.status(201).json({ message: stdout });
+    }
+
+    const execCallback = (error, stdout, stderr) => {
+        if (error) {
+            errorResponse(error, res);
+        }
+        if (stderr) {
+            stdErrResponse(stderr, res);
+        }
+        if (stdout) {
             successResponse(stdout, res);
         }
     }

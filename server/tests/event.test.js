@@ -1,15 +1,20 @@
 const eventHelper = require('./helpers/event-helper');
 const eventFactory = require('./helpers/event-factory');
+const fs = require('fs');
+
+const projectsPath = fs.existsSync('/.dockerenv') ? '/app/projects/' : `${process.env.PROJECT_PATH}`;
 
 describe('/event', () => {
   describe('post', () => {
-    it('returns 201 when recieves push event from repo that is not local', (done) => {
-      eventHelper.pushEvent(eventFactory.createEvent('test-1')).then(res => {
-        console.log(res.body.error);
-        expect(res.status).to.equal(201);
-        done();
-      })
-      .catch(error => done(error));
+    describe('repo is not local', () => {
+      it('clones a new copy of the repo and returns a 201', (done) => {
+        eventHelper.pushEvent(eventFactory.createEvent('test-1')).then(res => {
+          expect(res.status).to.equal(201);
+          expect(fs.existsSync(`${projectsPath}/test-1`)).to.equal(true);
+          done();
+        })
+          .catch(error => done(error));
+      });
     });
   });
 });

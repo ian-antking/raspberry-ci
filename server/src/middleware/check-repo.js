@@ -5,21 +5,17 @@ const resolveRepoPath = require('../utils/resolve-repo-path');
 const resolveRepoUrl = require('../utils/resolve-repo-url');
 
 const checkRepo = (req, res, next) => {
-    const repoName = req.body.repository.full_name;
-    const projectsPath = resolveProjectsPath();
-    const repoPath = resolveRepoPath(projectsPath, repoName);
-    const repoUrl = resolveRepoUrl(repoName)
-    req.repo = repoPath;
-
-    const cloneCallback = (stdout, res) => {
-        res.status(201).send({ message: stdout });
-    }
+    req.repoName = req.body.repository.full_name;
+    req.projectsPath = resolveProjectsPath();
+    req.repoPath = resolveRepoPath(req.projectsPath, req.repoName);
+    req.repoUrl = resolveRepoUrl(req.repoName);
+    req.actions = {};
 
     if (fs.existsSync(req.repo)) {
         next();
     } else {
-        req.freshClone = true;
-        runCommand(`git -C ${projectsPath} clone ${repoUrl}`, res, cloneCallback);
+        req.actions.clone = true;
+        next();
     }
 }
 

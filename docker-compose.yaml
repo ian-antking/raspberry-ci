@@ -10,7 +10,5 @@ services:
     ports:
       - ${PORT:-4000}:${PORT:-4000}
     volumes:
-      - ${PROJECT_PATH}:/app/${GITHUB_USER}/
+      - ${PROJECT_PATH}:/app/projects/
     command: npm start
-    environment: 
-      - DOCKER=true

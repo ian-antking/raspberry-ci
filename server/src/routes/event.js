@@ -10,8 +10,6 @@ const router = express.Router();
 router.post('/',
     auth,
     checkRepo,
-    resetRepo,
-    cleanRepo,
     EventController.handleEvent
 );
 

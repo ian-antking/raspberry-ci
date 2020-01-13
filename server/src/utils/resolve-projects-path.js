@@ -1,5 +1,6 @@
+const fs = require('fs')
 const resolveProjectsPath = () => {
-    return projectsPath = process.env.DOCKER ? '/app' : `${process.env.PROJECT_PATH}`;
+    return fs.existsSync('/.dockerenv') ? '/app/projects/' : `${process.env.PROJECT_PATH}`;
 }
 
 module.exports = resolveProjectsPath;

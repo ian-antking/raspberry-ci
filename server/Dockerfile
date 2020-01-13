@@ -10,6 +10,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
+RUN mkdir ./projects
+
 EXPOSE $port
 
 RUN echo $NODE_ENV

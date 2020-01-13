@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http');
 const dotenv = require('dotenv');
 const path = require('path');
 const app = require('./src/app');
+const exec = require('child_process').exec;
 
 let server = null;
 
@@ -28,7 +29,21 @@ before((done) => {
   })
 });
 
+const execCallback = (error, stdout, stderr) => {
+  if (error) {
+      console.log(error);
+  }
+  if (stderr) {
+      console.log(stderr);
+  }
+  if (stdout) {
+      console.log(stdout);
+  }
+}
+
 after((done) => {
   server.close();
+  console.log(`Cleaning up test repos in ${process.env.PROJECT_PATH}`);
+  exec(`rm -rf /app/projects/test*`, execCallback);
   done();
 });
