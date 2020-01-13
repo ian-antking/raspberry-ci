@@ -5,14 +5,11 @@ exports.handleEvent = (req, res) => {
     if (error) {
       return res.status(500).json({ error: error })
     }
-    if (stderr.includes('warning')) {
-      return res.status(201).json({ message: stderr })
-    }
-    if (stderr) {
-      return res.status(500).json({ error: stderr })
-    }
-    if (stdout) {
-      return res.status(201).json({ message: stdout })
+    if (stderr || stdout) {
+      return res.status(201).json({
+        stdout: stdout,
+        stderr: stderr,
+      })
     }
   }
 
