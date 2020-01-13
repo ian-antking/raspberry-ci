@@ -9,8 +9,9 @@ const auth = (req, res, next) => {
     
     if (req.headers['x-hub-signature'] !== sig) {
         res.status(401).json({ error: 'permission denied' })
+    } else {
+        next();
     }
-    next();
 }
 
 module.exports = auth;

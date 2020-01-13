@@ -1,6 +1,6 @@
 describe('/', () => {
   describe('get', () => {
-    it('returns a 200', (done) => {
+    xit('returns a 200', (done) => {
       chai.request(server)
         .get('/')
         .send()

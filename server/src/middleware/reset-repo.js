@@ -1,6 +1,7 @@
 const runCommand = require('../utils/run-command');
 
 const resetRepo = (req, res, next) => {
+    console.log('reseting');
     const repo = req.repo;
 
     if (req.freshClone) {

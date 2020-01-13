@@ -1,19 +1,22 @@
 
-FROM hypriot/rpi-node
+FROM balenalib/raspberry-pi-alpine-node
 
-WORKDIR /server/$GITHUB_USER
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
 
-RUN mkdir /test-1
+WORKDIR /server/$GITHUB_USER/
 
-RUN git -C /test-1 init --bare
+RUN mkdir ./test-1.git
 
-RUN mkdir /test-2
+RUN git -C ./test-1.git init --bare
 
-RUN git -C /test-2 init --bare
+RUN mkdir ./test-2.git
 
-RUN mkdir /test-3
+RUN git -C ./test-2.git init --bare
 
-RUN git -C /test-3 init --bare
+RUN mkdir ./test-3.git
+
+RUN git -C ./test-3.git init --bare
 
 RUN npm init -y
 

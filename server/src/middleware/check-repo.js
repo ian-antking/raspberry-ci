@@ -11,11 +11,15 @@ const checkRepo = (req, res, next) => {
     const repoUrl = resolveRepoUrl(repoName)
     req.repo = repoPath;
 
+    const cloneCallback = (stdout, res) => {
+        res.status(201).send({ message: stdout });
+    }
+
     if (fs.existsSync(req.repo)) {
         next();
     } else {
         req.freshClone = true;
-        runCommand(`git -C ${projectsPath} clone ${repoUrl}`, res);
+        runCommand(`git -C ${projectsPath} clone ${repoUrl}`, res, cloneCallback);
     }
 }
 

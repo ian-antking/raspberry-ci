@@ -1,5 +1,8 @@
 FROM balenalib/raspberry-pi-alpine-node
 
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
+
 ARG port=4000
 ARG env="production"
 
