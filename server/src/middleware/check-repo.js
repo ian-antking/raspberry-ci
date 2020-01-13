@@ -1,5 +1,4 @@
 const fs = require('fs')
-const runCommand = require('../utils/run-command');
 const resolveProjectsPath = require('../utils/resolve-projects-path');
 const resolveRepoPath = require('../utils/resolve-repo-path');
 const resolveRepoUrl = require('../utils/resolve-repo-url');
