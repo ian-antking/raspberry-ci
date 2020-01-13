@@ -7,8 +7,6 @@ const auth = (req, res, next) => {
         .digest('hex');
     const sig = `sha1=${sha}`
 
-    console.log(sig);
-
     if (req.headers['x-hub-signature'] !== sig) {
         res.status(401).json({ error: 'permission denied' })
     } else {
