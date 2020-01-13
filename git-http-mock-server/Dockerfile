@@ -4,7 +4,7 @@ FROM balenalib/raspberry-pi-alpine-node
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh
 
-WORKDIR /server/$GITHUB_USER/
+WORKDIR /server/test-user/
 
 RUN mkdir ./test-1.git
 
