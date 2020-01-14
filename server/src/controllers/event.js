@@ -15,8 +15,6 @@ exports.handleEvent = (req, res) => {
 
   let command;
 
-  console.log(req.repoPath);
-
   if (req.actions.clone) {
     command = `git -C ${req.projectsPath} clone ${req.repoUrl}`;
   } else {
