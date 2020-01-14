@@ -15,13 +15,15 @@ exports.handleEvent = (req, res) => {
 
   let command;
 
+  console.log(req.repoPath);
+
   if (req.actions.clone) {
     command = `git -C ${req.projectsPath} clone ${req.repoUrl}`;
   } else {
-    conmmand = `
-      git -C ${req.repo} reset --hard &&
-      git -C ${req.repo} clean -df &&
-      git -C ${req.repo} pull
+    command = `
+      git -C ${req.repoPath} reset --hard &&
+      git -C ${req.repoPath} clean -df &&
+      git -C ${req.repoPath} pull
     `
   }
   exec(command, execCallback);
